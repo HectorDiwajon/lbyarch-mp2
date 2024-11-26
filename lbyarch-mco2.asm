@@ -1,6 +1,13 @@
+section .data
+
 section .text
-global main
-main:
+bits 64
+default rel
+global imgCvtGrayInttoFloat
+
+imgCvtGrayInttoFloat:
     ;write your code here
+
+    
     xor rax, rax
     ret
