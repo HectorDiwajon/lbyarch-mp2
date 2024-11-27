@@ -1,6 +1,3 @@
-i.) Execution Time and Short Analysis of the Performance
+i.) Average Execution Time: 0.00 seconds
 
-C:
-
-x86-64:
 
