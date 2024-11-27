@@ -8,16 +8,18 @@ void imgCvtGrayInttoFloat(int num_elements, int *intPixels, float *floatPixels, 
 int main() {
 	int i, j;
 	int divisor = 255;
-    int num_elements = height * width;
-    int intPixels[height][width];
-    float* floatPixels = (float*)malloc(num_elements*sizeof(float));
-	
+	int height, width;
 	
 	printf("Input Height: ");
 	scanf("%d", &height);;
 	
 	printf("Input Width: ");
 	scanf("%d", &width);
+	
+    int num_elements = height * width;
+    int intPixels[height][width];
+    float* floatPixels = (float*)malloc(num_elements*sizeof(float));
+    
     
     for (i = 0; i < height; i++) {
         for (j = 0; j < width; j++) {
@@ -44,14 +46,28 @@ int main() {
     
 	printf("\n\n");
 
-    // Print the output
+	i = 0, j = 0;
+	
+	float floatArray[height][width];
+	
+    // Convert 1d array to 2d array
     printf("Converted floating-point pixel values:\n");
     for (i = 0; i < height; i++) {
         for (j = 0; j < width; j++) {
-            printf("%.2f ", floatPixels[i * width + j]);
+            floatArray[i][j] = floatPixels[i * width + j];
+//            printf("[%d][%d] %.2f = %.2f \n", i+1, j+1, floatArray[i][j], floatPixels[i * width + j]);
+        }
+    }
+    i = 0, j = 0;
+    printf("Converted floating-point pixel values:\n");
+    for (i = 0; i < height; i++) {
+        for (j = 0; j < width; j++) {
+            printf("%.2f ", floatArray[i][j]);
         }
         printf("\n");
     }
+    
+    
     
 
     // Print execution time
