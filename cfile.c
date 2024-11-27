@@ -1,51 +1,63 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-extern void imgCvtGrayInttoFloat(int a);
+// Function declaration for assembly
+void imgCvtGrayInttoFloat(int num_elements, int *intPixels, float *floatPixels, int divisor);
 
-int main() 
-{
-    int height, width, i, j;
+int main() {
+	int i, j;
+	int divisor = 255;
+    int height = 3, width = 4; // Example dimensions
+    int num_elements = height * width;
+    int intPixels[height][width];
+    float* floatPixels = (float*)malloc(num_elements*sizeof(float));
+	
+	
+	printf("Input Height: ");
+	scanf("%d", &height);;
+	
+	printf("Input Width: ");
+	scanf("%d", &width);
     
-    scanf("%d %d", &height, &width);
-    
-    int array[height][width];
-
     for (i = 0; i < height; i++) {
         for (j = 0; j < width; j++) {
-            if (j == width - 1) {
-                // For the last element in a row
-                scanf("%d", &array[i][j]);
-            } else {
-                // For all other elements
-                scanf("%d,", &array[i][j]);
-            }
+            printf("Enter value for intPixels[%d][%d]: ", i+1, j+1);
+            scanf("%d", &intPixels[i][j]);
         }
     }
-    
-    // For Verification - Delete when Submitting
-    printf("The 2D array is:\n");
+
+	
+	// For Verification - Delete when Submitting
+    printf("The 2D array inputted is:\n");
     for (i = 0; i < height; i++) {
         for (j = 0; j < width; j++) {
-            printf("%d ", array[i][j]);
+            printf("%d ", intPixels[i][j]);
         }
         printf("\n");
     }
+    // Timing the execution
+    clock_t start = clock();
 	
-	// Convert Int to Float for Array
+    // Call the assembly function
+    imgCvtGrayInttoFloat(num_elements, intPixels, floatPixels, divisor);
+    clock_t end = clock();
+    
+	printf("\n\n");
+
+    // Print the output
+    printf("Converted floating-point pixel values:\n");
     for (i = 0; i < height; i++) {
         for (j = 0; j < width; j++) {
-			int a = array[i][j];
-            imgCvtGrayInttoFloat(a);
-        }
-    }
-	
-	//Prints Final Array
-    for (i = 0; i < height; i++) {
-        for (j = 0; j < width; j++) {
-            printf("%d ", array[i][j]);
+            printf("%.2f ", floatPixels[i * width + j]);
         }
         printf("\n");
     }
+    
+
+    // Print execution time
+    printf("Execution time: %.6f seconds\n", (double)(end - start) / CLOCKS_PER_SEC);
 
     return 0;
 }
+
