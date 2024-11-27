@@ -8,7 +8,6 @@ void imgCvtGrayInttoFloat(int num_elements, int *intPixels, float *floatPixels, 
 int main() {
 	int i, j;
 	int divisor = 255;
-    int height = 3, width = 4; // Example dimensions
     int num_elements = height * width;
     int intPixels[height][width];
     float* floatPixels = (float*)malloc(num_elements*sizeof(float));
