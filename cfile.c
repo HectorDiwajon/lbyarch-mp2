@@ -11,7 +11,7 @@ int main() {
 	int height, width;
 	
 	printf("Input Height: ");
-	scanf("%d", &height);;
+	scanf("%d", &height);
 	
 	printf("Input Width: ");
 	scanf("%d", &width);
@@ -22,21 +22,25 @@ int main() {
     
     
     for (i = 0; i < height; i++) {
+		printf("Enter value for Row %d: ", i+1);
         for (j = 0; j < width; j++) {
-            printf("Enter value for intPixels[%d][%d]: ", i+1, j+1);
-            scanf("%d", &intPixels[i][j]);
+            if (j == width - 1) {
+                scanf("%d", &intPixels[i][j]);
+            } else {
+                scanf("%d,", &intPixels[i][j]);
+            }
         }
     }
-
 	
 	// For Verification - Delete when Submitting
-    printf("The 2D array inputted is:\n");
+    printf("\nThe 2D array inputted is:\n");
     for (i = 0; i < height; i++) {
         for (j = 0; j < width; j++) {
             printf("%d ", intPixels[i][j]);
         }
         printf("\n");
     }
+	
     // Timing the execution
     clock_t start = clock();
 	
@@ -51,7 +55,6 @@ int main() {
 	float floatArray[height][width];
 	
     // Convert 1d array to 2d array
-    printf("Converted floating-point pixel values:\n");
     for (i = 0; i < height; i++) {
         for (j = 0; j < width; j++) {
             floatArray[i][j] = floatPixels[i * width + j];
@@ -66,10 +69,7 @@ int main() {
         }
         printf("\n");
     }
-    
-    
-    
-
+        
     // Print execution time
     printf("Execution time: %.6f seconds\n", (double)(end - start) / CLOCKS_PER_SEC);
 
